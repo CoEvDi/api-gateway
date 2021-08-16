@@ -1,0 +1,5 @@
+aiofile
+fastapi
+httpx
+pyyaml
+uvicorn
