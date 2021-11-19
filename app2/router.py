@@ -39,13 +39,13 @@ async def find_route(route_name, method, path, query_strings):
     return route
 
 
-async def auth_check(token):
+async def get_auth_headers(token):
     async with httpx.AsyncClient() as ac:
         answer = await ac.post(cfg.AUTH_URL, json={'token': token})
         if answer.status_code == 200:
             return answer.json()['content']
         else:
-            HTTPabort(401, 'Unauthorized')
+            return {}
 
 
 async def proxy(request, route, auth_headers=None):
@@ -69,7 +69,9 @@ async def path(full_path: str, request: Request, response: Response):
 
     auth_headers = {}
     if route['auth_required'] or route['auth_forbidden']:
-        auth_headers = await auth_check(request.cookies.get(cfg.TOKEN_NAME))
+        auth_headers = await get_auth_headers(request.cookies.get(cfg.TOKEN_NAME))
+        if route['auth_required'] and not auth_headers:
+            HTTPabort(401, 'Unauthorized')
 
     if route['auth_forbidden'] and auth_headers:
         HTTPabort(409, 'User must be unauthorized')
