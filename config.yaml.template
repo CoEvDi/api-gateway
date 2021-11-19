@@ -1,0 +1,15 @@
+version: 
+
+domain: 
+
+update_interval: 
+
+token_name: 
+route_header_name: 
+
+backends:
+    backend-name:
+        protocol: 
+        host: 
+        port: 
+        route: 

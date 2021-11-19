@@ -1,7 +1,7 @@
 import uvicorn
 from argparse import ArgumentParser
 
-from app import app
+from app2 import app
 
 
 if __name__ == '__main__':
@@ -22,10 +22,11 @@ if __name__ == '__main__':
     log_config = uvicorn.config.LOGGING_CONFIG
     log_config['formatters']['access']['fmt'] = '%(asctime)s - %(client_addr)s - "%(request_line)s" %(status_code)s'
 
+
     uvicorn.run(
         'main:app',
         host=args.host,
         port=int(args.port),
         log_config=log_config,
-        reload=True
+        reload=False
     )

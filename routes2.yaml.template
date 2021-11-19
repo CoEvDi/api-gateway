@@ -1,0 +1,7 @@
+route-name-in-header:
+    allowed_methods: []
+    route_type: static/dynamic
+    route_path: 
+    destination: 
+    auth_required: 
+    auth_forbidden: 
