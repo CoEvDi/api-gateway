@@ -38,7 +38,7 @@ Gateway gets all requests to the system and serve them to needed micro-service:
 All config is a dict of pairs header_route_name - route_data, and route data is:
 -   **allowed_methods** - list of methond for route
 -   **route_type** - static/dynamic (dynamic means you have routes like /account/{account_name})
--   **route_path** - path for matching with route in request (regexp for dynamic routes)
+-   **route_path** - path for matching with route in request (regexp for dynamic routes) -  dot't worry about query string, it's processed separately via `request.query_params` and not included to matching
 -   **destination** - name of micro-service to proxy
 -   **auth_required** - True if need auth credentials from cookie-token
 -   **auth_forbidden** - True if need block auth requests (for example you can't login while being logged-in)
@@ -57,3 +57,5 @@ When you need to describe path for dynamic route its nessesary to know some rege
 [//]: # (These are reference links used in the body of this note and get stripped out when the markdown processor does its job. There is no need to format nicely because it shouldn't be seen. Thanks SO - http://stackoverflow.com/questions/4823468/store-comments-in-markdown-syntax)
 
    [Information repo]: <https://github.com/CoEvDi/service-info#backend-installing>
+
+[//]: #  (> INMORTANT NOTE - regexps need to use `!!string` literal scalar YAML syntax in config for properly python regexps work)
